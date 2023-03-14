@@ -1,0 +1,36 @@
+{% if linklists.sidebar-menu %}
+  <ul>
+    {% for link in linklists.sidebar-menu.links %}
+      <li>
+        {% assign link_no_space = link.title | split: " " | join: ""  | remove: "?"  | downcase%}
+        <a href="#{{ link_no_space }}">{{ link.title }}</a>
+        {% if linklists[link.handle] %}
+          <ul>
+            {% for sublink in linklists[link.handle].links %}
+              <li>
+                <a href="{{ sublink.url }}">{{ sublink.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": [{
+  "type": "header",
+  "content": "Ihre Überschrift hier"
+      
+}]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
