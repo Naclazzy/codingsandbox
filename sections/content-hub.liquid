@@ -107,7 +107,7 @@
           "type": "text",
           "id": "heading",
           "label": "Überschrift",
-          "default": "Überschrift Ihres Blogs"
+          "default": "Überschrift des Blogs"
         },
         {
           "type": "select",
@@ -170,7 +170,7 @@
     {
       "type": "text",
       "id": "title",
-      "default": "My Blog",
+      "default": "Mein Blog",
       "label": "Titel eingeben"
     }
   ],
@@ -192,7 +192,7 @@
   const sidebarTop = sidebar.offsetTop;
 
   window.addEventListener('scroll', () => {
-    if (window.innerWidth >= 768 && window.pageYOffset > sidebarTop) {
+    if (window.innerWidth >= 768) {
       sidebar.classList.add('fixed');
     } else {
       sidebar.classList.remove('fixed');
