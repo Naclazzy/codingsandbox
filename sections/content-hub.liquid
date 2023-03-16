@@ -5,58 +5,60 @@
     <div class="col-left">
       <div class="sidebar">
         {% for block in section.blocks %}
-          {% if block.type == 'sidebar_menu' %}
-            <h2
-              class="sidebar-title"
-              style="color: {{ block.settings.title_color }};"
-            >
-              {{ block.settings.sidebar_title }}
-            </h2>
-            {% if linklists['sidebar-menu'] %}
-              <ul>
-                {% for link in linklists['sidebar-menu'].links %}
-                  <li class="links">
-                    {% assign link_no_space = link.title | split: ' ' | join: '' | remove: '?' | downcase %}
-                    <a
-                      class="sidebar-links"
-                      href="#{{ link_no_space }}"
-                      style="color: {{ block.settings.sidebar_link_color }}!important; background-color: {{ block.settings.link_background_color }};"
-                    >
-                      {{- link.title -}}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          {% endif %}
+          {% case block.type %}
+            {% when 'sidebar_menu' %}
+              <h2
+                class="sidebar-title"
+                style="color: {{ block.settings.title_color }};"
+              >
+                {{ block.settings.sidebar_title }}
+              </h2>
+              {% if linklists['sidebar-menu'] %}
+                <ul>
+                  {% for link in linklists['sidebar-menu'].links %}
+                    <li class="links">
+                      {% assign link_no_space = link.title | split: ' ' | join: '' | remove: '?' | downcase %}
+                      <a
+                        class="sidebar-links"
+                        href="#{{ link_no_space }}"
+                        style="color: {{ block.settings.sidebar_link_color }}!important; background-color: {{ block.settings.link_background_color }};"
+                      >
+                        {{- link.title -}}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+          {% endcase %}
         {% endfor %}
       </div>
     </div>
 
     <div class="col-right">
       {% for block in section.blocks %}
-        {% if block.type == 'Content' %}
-          <div class="block1" id="{{ block.settings.block_id }}">
-            {% unless block.settings.heading == blank %}
-              <h2
-                id="{{ block.id }}-{{ section.id }}"
-                class="{{ block.settings.heading_size }}"
-                style="color: {{ block.settings.heading_color }};"
-              >
-                {{ block.settings.heading }}
-              </h2>
-            {% endunless %}
+        {% case block.type %}
+          {% when 'Content' %}
+            <div class="block1" id="{{ block.settings.block_id }}">
+              {% unless block.settings.heading == blank %}
+                <h2
+                  id="{{ block.id }}-{{ section.id }}"
+                  class="{{ block.settings.heading_size }}"
+                  style="color: {{ block.settings.heading_color }};"
+                >
+                  {{ block.settings.heading }}
+                </h2>
+              {% endunless %}
 
-            {% unless block.settings.subheading == blank %}
-              <h4 style="color: {{ block.settings.subheading_color }}">{{ block.settings.subheading }}</h4>
-            {% endunless %}
-            {% unless block.settings.custom_block == blank %}
-              <div class="custom-block" style="color: {{ block.settings.text_color }}">
-                {{ block.settings.custom_block }}
-              </div>
-            {%- endunless %}
-          </div>
-        {% endif %}
+              {% unless block.settings.subheading == blank %}
+                <h4 style="color: {{ block.settings.subheading_color }}">{{ block.settings.subheading }}</h4>
+              {% endunless %}
+              {% unless block.settings.custom_block == blank %}
+                <div class="custom-block" style="color: {{ block.settings.text_color }}">
+                  {{ block.settings.custom_block }}
+                </div>
+              {%- endunless %}
+            </div>
+        {% endcase %}
       {% endfor %}
     </div>
   </div>
