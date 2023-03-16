@@ -38,7 +38,7 @@
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'Content' %}
-            <div class="block1" id="{{ block.settings.block_id }}">
+            <div class="text-block" id="{{ block.settings.block_id }}">
               {% unless block.settings.heading == blank %}
                 <h2
                   id="{{ block.id }}-{{ section.id }}"
